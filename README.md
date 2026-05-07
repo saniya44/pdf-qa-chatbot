@@ -203,9 +203,3 @@ pdf-chatbot/
 | Better chunking       | `RecursiveCharacterTextSplitter`        |
 
 ---
-
-## ⚠️ Important Notes
-
-- **In-memory store** resets when the app restarts — use ChromaDB for persistence
-- **File size limit** is set to 50MB in `application.properties`
-- Never commit your `openai.api-key` to Git — use environment variables in production
