@@ -123,11 +123,11 @@ curl -X POST http://localhost:8080/api/pdf/upload \
 **Response:**
 ```json
 {
-  "success": true,
-  "fileName": "your-document.pdf",
-  "totalChunks": 47,
-  "message": "PDF processed and indexed successfully!",
-  "uploadedAt": "2025-05-05T10:30:00"
+   "success": true,
+   "fileName": "your-document.pdf",
+   "totalChunks": 47,
+   "message": "PDF processed and indexed successfully!",
+   "uploadedAt": "2025-05-05T10:30:00"
 }
 ```
 
@@ -148,12 +148,12 @@ curl -X POST http://localhost:8080/api/chat/ask \
 **Response:**
 ```json
 {
-  "success": true,
-  "question": "What are the key findings in this report?",
-  "answer": "Based on the document, the key findings are...",
-  "sourceChunks": ["chunk1 text...", "chunk2 text..."],
-  "processingTimeMs": 1340,
-  "timestamp": "2025-05-05T10:31:00"
+   "success": true,
+   "question": "What are the key findings in this report?",
+   "answer": "Based on the document, the key findings are...",
+   "sourceChunks": ["chunk1 text...", "chunk2 text..."],
+   "processingTimeMs": 1340,
+   "timestamp": "2025-05-05T10:31:00"
 }
 ```
 
@@ -186,40 +186,6 @@ pdf-chatbot/
 
 ---
 
-## 🔍 Key Concepts (For Interviews)
-
-### 1. RAG (Retrieval-Augmented Generation)
-Instead of relying on LLM training data, RAG:
-- Stores document knowledge in a vector database
-- Retrieves only relevant chunks at query time
-- Feeds them as context to the LLM
-
-**Why RAG?** LLMs have knowledge cutoffs and no access to private docs.
-
-### 2. Embeddings
-- Text is converted to a **dense vector** (e.g., 1536 dimensions for OpenAI Ada)
-- Semantically similar texts have **similar vectors** (high cosine similarity)
-- This allows semantic search, not just keyword matching
-
-### 3. Chunking Strategy
-```
-chunkSize=500, overlap=50
-
-Chunk 1: [0   → 499]
-Chunk 2: [450 → 949]    ← 50-char overlap
-Chunk 3: [900 → 1399]
-```
-Overlap prevents answers at chunk boundaries from being missed.
-
-### 4. Vector Store
-- Stores (embedding vector, text segment) pairs
-- Uses Approximate Nearest Neighbor (ANN) search
-- ChromaDB is used here; alternatives: Pinecone, Weaviate, PGVector
-
----
-
-## 💥 Resume Line
-
 > Built an intelligent PDF Q&A chatbot using Spring Boot and LangChain4j,
 > implementing RAG architecture with document chunking, embedding-based
 > semantic retrieval using ChromaDB, and context-aware LLM responses via OpenAI/Ollama.
@@ -237,9 +203,3 @@ Overlap prevents answers at chunk boundaries from being missed.
 | Better chunking       | `RecursiveCharacterTextSplitter`        |
 
 ---
-
-## ⚠️ Important Notes
-
-- **In-memory store** resets when the app restarts — use ChromaDB for persistence
-- **File size limit** is set to 50MB in `application.properties`
-- Never commit your `openai.api-key` to Git — use environment variables in production
