@@ -186,40 +186,6 @@ pdf-chatbot/
 
 ---
 
-## 🔍 Key Concepts (For Interviews)
-
-### 1. RAG (Retrieval-Augmented Generation)
-Instead of relying on LLM training data, RAG:
-- Stores document knowledge in a vector database
-- Retrieves only relevant chunks at query time
-- Feeds them as context to the LLM
-
-**Why RAG?** LLMs have knowledge cutoffs and no access to private docs.
-
-### 2. Embeddings
-- Text is converted to a **dense vector** (e.g., 1536 dimensions for OpenAI Ada)
-- Semantically similar texts have **similar vectors** (high cosine similarity)
-- This allows semantic search, not just keyword matching
-
-### 3. Chunking Strategy
-```
-chunkSize=500, overlap=50
-
-Chunk 1: [0   → 499]
-Chunk 2: [450 → 949]    ← 50-char overlap
-Chunk 3: [900 → 1399]
-```
-Overlap prevents answers at chunk boundaries from being missed.
-
-### 4. Vector Store
-- Stores (embedding vector, text segment) pairs
-- Uses Approximate Nearest Neighbor (ANN) search
-- ChromaDB is used here; alternatives: Pinecone, Weaviate, PGVector
-
----
-
-## 💥 Resume Line
-
 > Built an intelligent PDF Q&A chatbot using Spring Boot and LangChain4j,
 > implementing RAG architecture with document chunking, embedding-based
 > semantic retrieval using ChromaDB, and context-aware LLM responses via OpenAI/Ollama.
