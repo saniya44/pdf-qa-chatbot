@@ -1,0 +1,15 @@
+# Maven
+target/
+*.class
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# Sensitive — NEVER push your API key
+application.properties
+
+# OS
+.DS_Store
+Thumbs.db

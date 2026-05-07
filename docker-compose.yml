@@ -1,0 +1,41 @@
+version: '3.9'
+
+# ============================================================
+#   PDF Q&A Chatbot — Docker Compose
+#   Run: docker-compose up -d
+# ============================================================
+
+services:
+
+  # ── ChromaDB Vector Store ──────────────────────────────────
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: pdf-chatbot-chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - ALLOW_RESET=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Ollama (Optional: Free local LLM) ─────────────────────
+  # Remove this section if using OpenAI
+  ollama:
+    image: ollama/ollama:latest
+    container_name: pdf-chatbot-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # To pull a model after start:
+    # docker exec pdf-chatbot-ollama ollama pull llama3
+    # docker exec pdf-chatbot-ollama ollama pull nomic-embed-text
+
+volumes:
+  chroma_data:
+  ollama_data:
