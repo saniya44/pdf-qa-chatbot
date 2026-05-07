@@ -202,4 +202,8 @@ pdf-chatbot/
 | Streaming responses   | `StreamingChatLanguageModel`            |
 | Better chunking       | `RecursiveCharacterTextSplitter`        |
 
+<<<<<<< HEAD
 ---
+=======
+---
+>>>>>>> b7c1fcbee86c4882f3e205603ff28b58c20e49e6
